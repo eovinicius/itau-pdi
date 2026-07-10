@@ -1,0 +1,351 @@
+/* Typography helpers */
+.app-header__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.app-header__title {
+  font-size: 1.5rem;
+}
+
+/* Cards */
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--dur-fast) var(--ease-standard), transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard);
+}
+
+/* Icon buttons */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  transition: background-color var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
+}
+.icon-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: transform var(--dur-fast) var(--ease-standard), background-color var(--dur-fast) var(--ease-standard), opacity var(--dur-fast) var(--ease-standard);
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+.btn--primary:hover {
+  opacity: 0.88;
+}
+.btn--ghost {
+  background: var(--bg-elevated-2);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+.btn--ghost:hover {
+  background: var(--bg-hover);
+}
+.btn--danger {
+  color: var(--danger);
+}
+.btn--danger:hover {
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+}
+.btn--danger-solid {
+  background: var(--danger);
+  color: #fff;
+}
+.btn--danger-solid:hover {
+  opacity: 0.88;
+}
+.btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Inputs / selects */
+input[type="text"], input[type="search"], input[type="date"], select, textarea {
+  background: var(--bg-elevated-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-primary);
+  width: 100%;
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+input[type="search"] {
+  padding-left: calc(var(--space-4) * 2 + 8px);
+}
+select {
+  width: auto;
+}
+textarea {
+  resize: vertical;
+  min-height: 64px;
+  font-family: inherit;
+}
+input:hover, select:hover, textarea:hover {
+  border-color: var(--border-medium);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+}
+
+/* Progress bar */
+.progress-bar {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-elevated-2);
+  overflow: hidden;
+}
+.progress-bar__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  transition: width var(--dur-med) var(--ease-standard);
+}
+.progress-bar--sm {
+  height: 5px;
+}
+
+/* Dashboard tiles */
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.stat-tile__value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.stat-tile__label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.dashboard__overall .card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.dashboard__overall-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.dashboard__overall-value {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.category-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.category-row__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+.category-row__name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+}
+.category-row__name svg {
+  width: 15px;
+  height: 15px;
+}
+
+.category-row__balance {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+.category-row__balance--warning {
+  color: var(--warning);
+}
+.category-row__balance svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* Matrix item row */
+.matrix-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+.matrix-item:hover {
+  background: var(--bg-elevated);
+}
+
+.matrix-item__check {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-contrast);
+  flex-shrink: 0;
+  transition: background-color var(--dur-fast), border-color var(--dur-fast);
+}
+.matrix-item--done .matrix-item__check {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.matrix-item--done .matrix-item__text {
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+.matrix-item__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.matrix-item__remove {
+  opacity: 0;
+  color: var(--text-tertiary);
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.matrix-item:hover .matrix-item__remove {
+  opacity: 1;
+}
+.matrix-item__remove:hover {
+  color: var(--danger);
+  background: var(--bg-hover);
+}
+
+/* Hover-reveal doesn't work on touch — keep remove always reachable there. */
+@media (hover: none) {
+  .matrix-item__remove {
+    opacity: 0.6;
+  }
+}
+
+input.matrix-add-input {
+  font-size: 0.82rem;
+  padding: 6px var(--space-3);
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-tertiary);
+}
+input.matrix-add-input::placeholder {
+  color: var(--text-tertiary);
+}
+input.matrix-add-input:hover {
+  color: var(--text-secondary);
+}
+input.matrix-add-input:focus {
+  background: var(--bg-elevated-2);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.editable {
+  cursor: text;
+  border-radius: 6px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+}
+.editable:hover {
+  background: var(--bg-elevated-2);
+}
+.editable-input {
+  width: 100%;
+}
+
+/* Confirm dialog */
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  background: var(--overlay-scrim);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.dialog-card {
+  width: 100%;
+  max-width: 360px;
+  box-shadow: var(--shadow-lg);
+}
+.dialog-message {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-5);
+}
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* Bigger tap targets once we're on a phone-sized viewport */
+@media (max-width: 640px) {
+  .matrix-item {
+    padding: var(--space-3);
+  }
+  .matrix-item__check {
+    width: 22px;
+    height: 22px;
+  }
+  .matrix-item__remove {
+    width: 30px;
+    height: 30px;
+  }
+  input.matrix-add-input {
+    padding: var(--space-2) var(--space-3);
+  }
+}

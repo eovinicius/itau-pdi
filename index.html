@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDI — Pleno → Sênior</title>
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('pdi-theme');
+    var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.dataset.theme = theme;
+  } catch (e) {
+    document.documentElement.dataset.theme = 'dark';
+  }
+})();
+</script>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+
+<header class="app-header no-print">
+  <div class="app-header__brand">
+    <span class="app-header__eyebrow">Plano de Desenvolvimento Individual</span>
+    <h1 class="app-header__title">Pleno → Sênior</h1>
+  </div>
+  <div class="app-header__actions">
+    <button type="button" class="icon-btn" id="theme-toggle" aria-label="Alternar tema claro/escuro" title="Alternar tema"></button>
+    <button type="button" class="icon-btn" id="print-btn" aria-label="Exportar como PDF / Imprimir" title="Exportar PDF / Imprimir"></button>
+    <button type="button" class="icon-btn" id="export-btn" aria-label="Exportar plano em JSON" title="Exportar JSON"></button>
+    <button type="button" class="icon-btn" id="import-btn" aria-label="Importar plano de um arquivo JSON" title="Importar JSON"></button>
+    <input type="file" id="import-input" accept="application/json" hidden>
+  </div>
+</header>
+
+<div id="dialog-root" class="no-print"></div>
+
+<main class="app-main">
+
+  <section id="dashboard-root" class="dashboard" aria-label="Painel geral de progresso"></section>
+
+  <section class="controls no-print" aria-label="Busca">
+    <div class="controls__search">
+      <span class="controls__search-icon" id="search-icon-slot"></span>
+      <input type="search" id="search-input" placeholder="Buscar meta..." aria-label="Buscar metas">
+    </div>
+  </section>
+
+  <section id="matrix-root" class="matrix-section" aria-label="Matriz de objetivos"></section>
+
+</main>
+
+<footer class="app-footer no-print">
+  <span>PDI pessoal — salvo automaticamente neste navegador.</span>
+</footer>
+
+<script src="js/icons.js" defer></script>
+<script src="js/utils.js" defer></script>
+<script src="js/model.js" defer></script>
+<script src="js/aggregate.js" defer></script>
+<script src="js/storage.js" defer></script>
+<script src="js/state.js" defer></script>
+<script src="js/theme.js" defer></script>
+<script src="js/dialog.js" defer></script>
+<script src="js/search.js" defer></script>
+<script src="js/editing.js" defer></script>
+<script src="js/importExport.js" defer></script>
+<script src="js/print.js" defer></script>
+<script src="js/render.js" defer></script>
+<script src="js/seed.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

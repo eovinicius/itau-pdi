@@ -1,0 +1,47 @@
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .app-main {
+    max-width: none;
+    padding: 0;
+  }
+
+  .card {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .progress-bar {
+    background: #eee !important;
+    border: 1px solid #ccc;
+  }
+  .progress-bar__fill {
+    background: #333 !important;
+  }
+
+  .matrix {
+    grid-template-columns: minmax(140px, 180px) repeat(2, minmax(0, 1fr));
+  }
+  .matrix-row-label, .matrix-cell {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .matrix-item__remove {
+    display: none !important;
+  }
+
+  a {
+    color: #000 !important;
+  }
+}
