@@ -2,26 +2,17 @@
   .card {
     animation: card-in var(--dur-med) var(--ease-standard) both;
   }
-  .icon-btn svg, .matrix-item__check {
+  .icon-btn svg {
     transition: transform var(--dur-fast) var(--ease-standard);
   }
   .icon-btn:active svg {
     transform: scale(0.88);
-  }
-  .matrix-item--done .matrix-item__check {
-    animation: check-pop var(--dur-fast) var(--ease-standard);
   }
 }
 
 @keyframes card-in {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes check-pop {
-  0% { transform: scale(0.7); }
-  60% { transform: scale(1.12); }
-  100% { transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {

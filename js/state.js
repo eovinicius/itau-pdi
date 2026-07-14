@@ -1,7 +1,6 @@
 window.PDI = window.PDI || {};
 
 PDI.state = (function () {
-  var u = PDI.utils;
   var model = PDI.model;
 
   var plan = model.createPlan();
@@ -20,11 +19,6 @@ PDI.state = (function () {
     listeners.forEach(function (fn) { fn(getState()); });
   }
 
-  function touchPlan() {
-    plan.meta.updatedAt = u.nowIso();
-    PDI.storage.persist(plan);
-  }
-
   function getState() {
     return { plan: plan, ui: ui };
   }
@@ -37,42 +31,6 @@ PDI.state = (function () {
     notify();
   }
 
-  function findGoal(id) {
-    return plan.goals.find(function (g) { return g.id === id; });
-  }
-
-  function addGoal(partial) {
-    var order = plan.goals.filter(function (g) {
-      return g.categoryId === partial.categoryId && g.horizon === partial.horizon;
-    }).length;
-    var goal = model.createGoal(Object.assign({ order: order }, partial || {}));
-    plan.goals.push(goal);
-    touchPlan();
-    notify();
-    return goal;
-  }
-
-  function updateGoal(id, patch) {
-    var goal = findGoal(id);
-    if (!goal) return;
-    Object.assign(goal, patch);
-    goal.updatedAt = u.nowIso();
-    touchPlan();
-    notify();
-  }
-
-  function toggleGoalDone(id) {
-    var goal = findGoal(id);
-    if (!goal) return;
-    updateGoal(id, { done: !goal.done });
-  }
-
-  function removeGoal(id) {
-    plan.goals = plan.goals.filter(function (g) { return g.id !== id; });
-    touchPlan();
-    notify();
-  }
-
   function setQuery(q) {
     ui.query = q;
     notify();
@@ -82,11 +40,6 @@ PDI.state = (function () {
     getState: getState,
     subscribe: subscribe,
     replacePlan: replacePlan,
-    findGoal: findGoal,
-    addGoal: addGoal,
-    updateGoal: updateGoal,
-    toggleGoalDone: toggleGoalDone,
-    removeGoal: removeGoal,
     setQuery: setQuery
   };
 })();

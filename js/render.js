@@ -17,42 +17,8 @@ PDI.render = (function () {
     return CAT_COLOR_VARS[idx >= 0 ? idx % CAT_COLOR_VARS.length : 0];
   }
 
-  function progressBar(fraction, opts) {
-    opts = opts || {};
-    var pct = Math.round(u.clamp(fraction, 0, 1) * 100);
-    var cls = 'progress-bar' + (opts.small ? ' progress-bar--sm' : '');
-    return (
-      '<div class="' + cls + '" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100">' +
-        '<div class="progress-bar__fill" style="width:' + pct + '%' + (opts.color ? ';background:' + opts.color : '') + '"></div>' +
-      '</div>'
-    );
-  }
-
   function renderDashboard(plan) {
-    var overall = agg.overallProgress(plan);
-    var counts = agg.counts(plan);
-
-    var overallHtml =
-      '<div class="dashboard__overall">' +
-        '<div class="card">' +
-          '<div class="dashboard__overall-top">' +
-            '<div>' +
-              '<div class="app-header__eyebrow">Progresso geral do plano</div>' +
-              '<div class="dashboard__overall-value">' + Math.round(overall * 100) + '%</div>' +
-            '</div>' +
-            '<div class="stat-tile" style="text-align:right">' +
-              '<span class="stat-tile__value">' + counts.completed + '/' + counts.total + '</span>' +
-              '<span class="stat-tile__label">objetivos concluídos</span>' +
-            '</div>' +
-          '</div>' +
-          progressBar(overall) +
-        '</div>' +
-      '</div>';
-
-    var categoryHtml = plan.categories.map(function (cat, idx) {
-      var pct = agg.categoryProgress(plan.goals, cat.id);
-      var color = CAT_COLOR_VARS[idx % CAT_COLOR_VARS.length];
-
+    var categoryHtml = plan.categories.map(function (cat) {
       var count = plan.goals.filter(function (g) { return g.categoryId === cat.id; }).length;
       var targetPct = Math.round(cat.weight * 100);
       var actualPct = Math.round(agg.goalCountShare(plan.goals, cat.id) * 100);
@@ -69,28 +35,21 @@ PDI.render = (function () {
           '<div class="card category-row">' +
             '<div class="category-row__top">' +
               '<span class="category-row__name">' + icons.svg(cat.icon, { size: 15 }) + esc(cat.name) + ' <span style="opacity:.55">(' + targetPct + '%)</span></span>' +
-              '<strong>' + Math.round(pct * 100) + '%</strong>' +
             '</div>' +
-            progressBar(pct, { small: true, color: color }) +
             balanceHtml +
           '</div>' +
         '</div>'
       );
     }).join('');
 
-    return overallHtml + categoryHtml;
+    return categoryHtml;
   }
 
   function renderItem(goal, color) {
     return (
-      '<li class="matrix-item' + (goal.done ? ' matrix-item--done' : '') + '" data-goal-id="' + goal.id + '">' +
-        '<button type="button" class="matrix-item__check" data-action="toggle-goal" data-goal-id="' + goal.id + '" style="border-color:' + color + '" aria-label="Marcar como concluído">' +
-          (goal.done ? icons.svg('check', { size: 11 }) : '') +
-        '</button>' +
-        '<span class="matrix-item__text editable" data-field="text" data-goal-id="' + goal.id + '">' + esc(goal.text) + '</span>' +
-        '<button type="button" class="matrix-item__remove" data-action="remove-goal" data-goal-id="' + goal.id + '" aria-label="Remover meta">' +
-          icons.svg('x', { size: 12 }) +
-        '</button>' +
+      '<li class="matrix-item" data-goal-id="' + goal.id + '">' +
+        '<span class="matrix-item__dot" style="background:' + color + '" aria-hidden="true"></span>' +
+        '<span class="matrix-item__text">' + esc(goal.text) + '</span>' +
       '</li>'
     );
   }
@@ -108,7 +67,6 @@ PDI.render = (function () {
     return (
       '<div class="matrix-cell" data-category-id="' + categoryId + '" data-horizon="' + horizon + '" data-horizon-label="' + horizonMeta.label + ' — ' + horizonMeta.sub + '">' +
         '<ul class="matrix-item-list">' + items + '</ul>' +
-        '<input type="text" class="matrix-add-input" data-category-id="' + categoryId + '" data-horizon="' + horizon + '" placeholder="+ Adicionar meta" aria-label="Adicionar meta">' +
       '</div>'
     );
   }

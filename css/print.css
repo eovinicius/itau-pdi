@@ -22,23 +22,12 @@
     page-break-inside: avoid;
   }
 
-  .progress-bar {
-    background: #eee !important;
-    border: 1px solid #ccc;
-  }
-  .progress-bar__fill {
-    background: #333 !important;
-  }
-
   .matrix {
     grid-template-columns: minmax(140px, 180px) repeat(2, minmax(0, 1fr));
   }
   .matrix-row-label, .matrix-cell {
     break-inside: avoid;
     page-break-inside: avoid;
-  }
-  .matrix-item__remove {
-    display: none !important;
   }
 
   a {

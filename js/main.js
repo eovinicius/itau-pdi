@@ -38,47 +38,6 @@
     });
   }
 
-  function addGoalFromCell(cell) {
-    var input = cell.querySelector('.matrix-add-input');
-    var text = input.value.trim();
-    if (!text) return;
-    state.addGoal({
-      text: text,
-      categoryId: input.dataset.categoryId,
-      horizon: input.dataset.horizon
-    });
-  }
-
-  function wireMatrixDelegation() {
-    var root = document.getElementById('matrix-root');
-
-    root.addEventListener('click', function (e) {
-      var actionEl = e.target.closest('[data-action]');
-      if (actionEl && root.contains(actionEl)) {
-        var action = actionEl.dataset.action;
-        if (action === 'toggle-goal') {
-          state.toggleGoalDone(actionEl.dataset.goalId);
-        } else if (action === 'remove-goal') {
-          var goalId = actionEl.dataset.goalId;
-          var goal = state.findGoal(goalId);
-          var label = goal ? goal.text : 'esta meta';
-          PDI.dialog.confirm('Remover "' + label + '"?').then(function (ok) {
-            if (ok) state.removeGoal(goalId);
-          });
-        }
-      }
-    });
-
-    root.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' && e.target.classList.contains('matrix-add-input')) {
-        e.preventDefault();
-        addGoalFromCell(e.target.closest('.matrix-cell'));
-      }
-    });
-
-    PDI.editing.attach(root);
-  }
-
   function boot() {
     var loaded = PDI.storage.load();
     if (loaded) {
@@ -90,7 +49,6 @@
     wireHeaderIcons();
     wireControls();
     wireImportExport();
-    wireMatrixDelegation();
     PDI.theme.init();
     PDI.print.init();
 

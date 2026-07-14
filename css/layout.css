@@ -43,16 +43,8 @@
 
 .dashboard {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--space-4);
-}
-
-.dashboard__overall {
-  grid-column: 1 / -1;
-}
-
-.dashboard__category {
-  grid-column: span 2;
 }
 
 .controls {
