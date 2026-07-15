@@ -38,7 +38,7 @@ PDI.seed = (function () {
 
   function goals() {
     return [
-      // ── Conhecimento teórico (50%) — 6 curto + 3 longo ──
+      // ── Conhecimento teórico (50%) — 4 curto + 3 longo ──
       g({
         title: 'Dominar os fundamentos de arquitetura de soluções na AWS',
         objective: 'Construir base sólida nos serviços core da AWS (compute, storage, rede, IAM) e nos pilares do Well-Architected Framework para desenhar soluções na nuvem com segurança e custo-eficiência.',
@@ -50,32 +50,12 @@ PDI.seed = (function () {
         categoryId: CAT_THEO, horizon: 'short'
       }),
       g({
-        title: 'Aprofundar fundamentos de contêineres e Kubernetes',
-        objective: 'Entender contêineres (Docker) e orquestração com Kubernetes para operar e evoluir aplicações cloud-native com segurança.',
-        action: 'Curso de Docker + Kubernetes (fundamentos ao intermediário)',
+        title: 'Estudar Apache Kafka e event streaming',
+        objective: 'Compreender os fundamentos do Apache Kafka (tópicos, partições, consumer groups, offsets, ordenação e entrega) para desenhar soluções de streaming de eventos.',
+        action: 'Estudo de Apache Kafka (conceitos, arquitetura e casos de uso)',
         deadline: DL_SHORT,
-        successCriteria: 'Curso concluído\nEntender pods, deployments e services\nSubir uma aplicação conteinerizada localmente',
-        expectedOutcome: 'Compreender como aplicações rodam em contêineres/Kubernetes e conversar sobre o tema com propriedade.',
-        type: 'curso',
-        categoryId: CAT_THEO, horizon: 'short'
-      }),
-      g({
-        title: 'Consolidar Clean Code e boas práticas de arquitetura',
-        objective: 'Aprofundar princípios de código limpo, SOLID e padrões de arquitetura para escrever software mais sustentável.',
-        action: 'Ler um livro de referência (ex.: Clean Architecture) e revisar os princípios SOLID',
-        deadline: DL_SHORT,
-        successCriteria: 'Livro de referência concluído\nMapear princípios aplicáveis ao código atual\nCompartilhar 1 aprendizado com o time',
-        expectedOutcome: 'Escrever e revisar código com critérios claros de qualidade e desenho.',
-        type: 'estudo',
-        categoryId: CAT_THEO, horizon: 'short'
-      }),
-      g({
-        title: 'Estudar mensageria e event streaming',
-        objective: 'Compreender fundamentos de mensageria e streaming de eventos (filas, tópicos, entrega, ordenação) aplicáveis a sistemas distribuídos.',
-        action: 'Estudo de Kafka/SNS/SQS (conceitos e casos de uso)',
-        deadline: DL_SHORT,
-        successCriteria: 'Diferença entre filas e tópicos compreendida\nMapear casos de uso no contexto do time\nDocumentar um resumo dos aprendizados',
-        expectedOutcome: 'Ter base para desenhar e discutir soluções assíncronas orientadas a eventos.',
+        successCriteria: 'Conceitos de tópicos, partições e consumer groups compreendidos\nMapear casos de uso de Kafka no contexto do time\nDocumentar um resumo dos aprendizados',
+        expectedOutcome: 'Ter base sólida em Kafka para desenhar e discutir soluções assíncronas orientadas a eventos.',
         type: 'estudo',
         categoryId: CAT_THEO, horizon: 'short'
       }),
@@ -130,7 +110,7 @@ PDI.seed = (function () {
         categoryId: CAT_THEO, horizon: 'long'
       }),
 
-      // ── Experimentação prática (40%) — 3 curto + 2 longo ──
+      // ── Experimentação prática (40%) — 2 curto + 2 longo ──
       g({
         title: 'Aplicar padrões de resiliência em arquitetura serverless na prática',
         objective: 'Validar na prática padrões de resiliência (retry e dead-letter queue) em uma arquitetura serverless.',
@@ -142,39 +122,29 @@ PDI.seed = (function () {
         categoryId: CAT_PRAC, horizon: 'short'
       }),
       g({
-        title: 'Montar um lab de Kubernetes local com uma aplicação',
-        objective: 'Praticar contêineres e Kubernetes subindo uma aplicação em um cluster local, do build ao deploy.',
-        action: 'Lab pessoal: subir uma app em Kubernetes local (kind/minikube)',
+        title: 'Implementar o padrão Saga em uma PoC de transação distribuída',
+        objective: 'Aplicar o padrão Saga (orquestração e/ou coreografia) para coordenar transações distribuídas com compensação de falhas entre serviços.',
+        action: 'PoC de Saga pattern com passos de compensação (usando Kafka)',
         deadline: DL_SHORT,
-        successCriteria: 'Cluster local funcionando\nAplicação implantada com deployment + service\nApp exposta e validada localmente',
-        expectedOutcome: 'Ganhar confiança prática para operar aplicações em Kubernetes.',
-        type: 'pratica',
-        categoryId: CAT_PRAC, horizon: 'short'
-      }),
-      g({
-        title: 'PoC de pipeline CI/CD completo',
-        objective: 'Validar na prática um fluxo de CI/CD do build ao deploy, entendendo etapas e automações.',
-        action: 'PoC de pipeline CI/CD (build → testes → deploy) num projeto de teste',
-        deadline: DL_SHORT,
-        successCriteria: 'Pipeline executando build e testes\nDeploy automatizado para um ambiente de teste\nProcesso documentado',
-        expectedOutcome: 'Saber estruturar um pipeline de CI/CD e aplicá-lo em projetos reais.',
+        successCriteria: 'Fluxo de saga implementado com passos e compensações\nCenário de falha revertido via transações compensatórias\nTrade-offs entre orquestração e coreografia documentados',
+        expectedOutcome: 'Saber projetar e discutir consistência em transações distribuídas usando o padrão Saga.',
         type: 'poc',
         categoryId: CAT_PRAC, horizon: 'short'
       }),
       g({
-        title: 'Dominar arquitetura orientada a eventos na prática',
-        objective: 'Aprofundar Event-Driven Architecture (eventos, filas, tópicos, idempotência) por meio de uma PoC avançada.',
-        action: 'PoC avançada de Event-Driven Architecture',
+        title: 'Dominar EDA com Kafka na prática',
+        objective: 'Aprofundar Event-Driven Architecture com Apache Kafka (tópicos, partições, idempotência) por meio de uma PoC avançada.',
+        action: 'PoC avançada de EDA com Apache Kafka',
         deadline: DL_LONG,
-        successCriteria: 'PoC de EDA implementada\nFluxo assíncrono com idempotência tratado\nTrade-offs de EDA documentados',
+        successCriteria: 'PoC de EDA com Kafka implementada\nFluxo assíncrono com idempotência tratado\nTrade-offs de Kafka/EDA documentados',
         expectedOutcome: 'Projetar fluxos assíncronos orientados a eventos com propriedade.',
         type: 'poc',
         categoryId: CAT_PRAC, horizon: 'long'
       }),
       g({
         title: 'Projeto pessoal com arquitetura orientada a eventos',
-        objective: 'Consolidar Event-Driven Architecture construindo um projeto pessoal com mensageria (Kafka/SQS), tratando idempotência e falhas.',
-        action: 'Projeto pessoal aplicando EDA com filas/tópicos',
+        objective: 'Consolidar Event-Driven Architecture construindo um projeto pessoal com Apache Kafka, tratando idempotência e falhas.',
+        action: 'Projeto pessoal aplicando EDA com Kafka',
         deadline: DL_LONG,
         successCriteria: 'Projeto com produção e consumo de eventos\nIdempotência e retry tratados\nCódigo publicado em repositório pessoal',
         expectedOutcome: 'Dominar, na prática, o desenho de sistemas orientados a eventos.',
@@ -182,17 +152,7 @@ PDI.seed = (function () {
         categoryId: CAT_PRAC, horizon: 'long'
       }),
 
-      // ── Aplicação no trabalho (10%) — 2 curto + 2 longo ──
-      g({
-        title: 'Elevar a maturidade de IaC do squad com componentes reutilizáveis',
-        objective: 'Padronizar e acelerar provisionamentos do squad criando módulos Terraform reutilizáveis, versionados e documentados.',
-        action: 'Criar módulo Terraform reutilizável para o squad',
-        deadline: DL_SHORT,
-        successCriteria: 'Módulo Terraform reutilizável criado e versionado\nMódulo adotado em ao menos 1 serviço do squad\nDocumentação de uso disponível para o time',
-        expectedOutcome: 'Reduzir retrabalho e inconsistências de infraestrutura, com o squad reutilizando componentes padronizados.',
-        type: 'pratica',
-        categoryId: CAT_HAND, horizon: 'short'
-      }),
+      // ── Aplicação no trabalho (10%) — 1 curto + 2 longo ──
       g({
         title: 'Levar conhecimento de AWS/IaC para uma entrega real do produto',
         objective: 'Transformar o aprendizado de AWS e Terraform em valor concreto, aplicando-o em uma iniciativa real do roadmap do IFA.',

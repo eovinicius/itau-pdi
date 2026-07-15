@@ -2,7 +2,7 @@ window.PDI = window.PDI || {};
 
 PDI.storage = (function () {
   var KEY = 'pdi-plan-v1';
-  var CURRENT_SCHEMA = 9;
+  var CURRENT_SCHEMA = 10;
 
   // v5 backfill: an objective (goal.text) derived from each seed action, keyed by the
   // action string, so plans that still have a blank objective get one on load.
@@ -158,6 +158,26 @@ PDI.storage = (function () {
         }
       }
       plan.schemaVersion = 9;
+      return plan;
+    },
+    // v10 removeu metas fora do contexto do time (contêineres/Kubernetes, Clean Code, lab
+    // de Kubernetes, maturidade de IaC do squad), trocou a PoC de CI/CD por uma PoC de Saga
+    // pattern e deixou a trilha de mensageria específica de Kafka. Sincroniza goals+categories
+    // do seed, guardado por sobreposição de títulos (os ~11 títulos inalterados garantem o
+    // match) para não tocar planos importados.
+    9: function upgradeFrom9To10(plan) {
+      var seed;
+      try { seed = PDI.seed.buildSeedPlan(); } catch (e) { seed = null; }
+      if (seed) {
+        var seedTitles = {};
+        seed.goals.forEach(function (s) { if (s.text) seedTitles[s.text] = true; });
+        var looksLikeSeed = (plan.goals || []).some(function (g) { return seedTitles[g.text]; });
+        if (looksLikeSeed) {
+          plan.categories = seed.categories;
+          plan.goals = seed.goals;
+        }
+      }
+      plan.schemaVersion = 10;
       return plan;
     }
   };
