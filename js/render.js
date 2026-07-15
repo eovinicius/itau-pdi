@@ -12,6 +12,7 @@ PDI.render = (function () {
     { key: 'long', label: 'Longo prazo', sub: '12–36 meses' }
   ];
 
+
   function categoryColor(categories, categoryId) {
     var idx = categories.findIndex(function (c) { return c.id === categoryId; });
     return CAT_COLOR_VARS[idx >= 0 ? idx % CAT_COLOR_VARS.length : 0];
@@ -48,8 +49,11 @@ PDI.render = (function () {
   function renderItem(goal, color) {
     return (
       '<li class="matrix-item" data-goal-id="' + goal.id + '">' +
-        '<span class="matrix-item__dot" style="background:' + color + '" aria-hidden="true"></span>' +
-        '<span class="matrix-item__text">' + esc(goal.text) + '</span>' +
+        '<button type="button" class="matrix-item__open" data-action="open-goal" data-goal-id="' + goal.id + '" title="Ver detalhes">' +
+          '<span class="matrix-item__dot" style="background:' + color + '" aria-hidden="true"></span>' +
+          '<span class="matrix-item__text">' + esc(goal.text) + '</span>' +
+          '<span class="matrix-item__chevron" aria-hidden="true">' + icons.svg('chevronRight', { size: 14 }) + '</span>' +
+        '</button>' +
       '</li>'
     );
   }
@@ -59,6 +63,7 @@ PDI.render = (function () {
     var horizonMeta = HORIZONS.find(function (h) { return h.key === horizon; });
     var items = goals
       .filter(function (g) { return g.categoryId === categoryId && g.horizon === horizon; })
+      .filter(function (g) { return g.text && String(g.text).trim(); })
       .filter(function (g) { return PDI.search.matchesQuery(g, query); })
       .sort(function (a, b) { return a.order - b.order; })
       .map(function (g) { return renderItem(g, color); })

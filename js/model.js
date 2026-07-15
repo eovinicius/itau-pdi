@@ -17,7 +17,13 @@ PDI.model = (function () {
     var now = u.nowIso();
     return {
       id: opts.id || u.uuid(),
-      text: opts.text || 'Nova meta',
+      text: opts.text || '',
+      objective: opts.objective || '',
+      action: opts.action || '',
+      deadline: opts.deadline || '',
+      successCriteria: opts.successCriteria || '',
+      expectedOutcome: opts.expectedOutcome || '',
+      type: opts.type || '',
       categoryId: opts.categoryId || null,
       horizon: opts.horizon || 'short',
       done: !!opts.done,
@@ -31,7 +37,7 @@ PDI.model = (function () {
     opts = opts || {};
     var now = u.nowIso();
     return {
-      schemaVersion: 2,
+      schemaVersion: 9,
       meta: Object.assign({
         planName: 'Meu PDI',
         createdAt: now,

@@ -38,6 +38,17 @@
     });
   }
 
+  function wireMatrixDelegation() {
+    var root = document.getElementById('matrix-root');
+    root.addEventListener('click', function (e) {
+      var openEl = e.target.closest('[data-action="open-goal"]');
+      if (openEl && root.contains(openEl)) {
+        var goal = state.findGoal(openEl.dataset.goalId);
+        if (goal) PDI.dialog.goalDetail(goal);
+      }
+    });
+  }
+
   function boot() {
     var loaded = PDI.storage.load();
     if (loaded) {
@@ -49,6 +60,7 @@
     wireHeaderIcons();
     wireControls();
     wireImportExport();
+    wireMatrixDelegation();
     PDI.theme.init();
     PDI.print.init();
 

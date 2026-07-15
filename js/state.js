@@ -31,6 +31,10 @@ PDI.state = (function () {
     notify();
   }
 
+  function findGoal(id) {
+    return plan.goals.find(function (g) { return g.id === id; });
+  }
+
   function setQuery(q) {
     ui.query = q;
     notify();
@@ -40,6 +44,7 @@ PDI.state = (function () {
     getState: getState,
     subscribe: subscribe,
     replacePlan: replacePlan,
+    findGoal: findGoal,
     setQuery: setQuery
   };
 })();
